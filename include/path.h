@@ -41,7 +41,7 @@ class Path {
     pubPathVehicles = n.advertise<visualization_msgs::MarkerArray>(pathVehicleTopic, 1);
 
     // CONFIGURE THE CONTAINER
-    path.header.frame_id = "path";
+    path.header.frame_id = "map";
   }
 
   //  // __________
@@ -81,6 +81,8 @@ class Path {
 
   /// Clears the path
   void clear();
+  /// Retrieve the path
+  nav_msgs::Path getPath() { return path; }
   /// Publishes the path
   void publishPath() { pubPath.publish(path); }
   /// Publishes the nodes of the path

@@ -12,7 +12,7 @@ void Visualize::clear() {
   visualization_msgs::MarkerArray costCubes3D;
   visualization_msgs::Marker costCube3D;
   // CLEAR THE COST HEATMAP
-  costCube3D.header.frame_id = "path";
+  costCube3D.header.frame_id = "map";
   costCube3D.header.stamp = ros::Time::now();
   costCube3D.id = 0;
   costCube3D.action = 3;
@@ -23,7 +23,7 @@ void Visualize::clear() {
   visualization_msgs::MarkerArray costCubes2D;
   visualization_msgs::Marker costCube2D;
   // CLEAR THE COST HEATMAP
-  costCube2D.header.frame_id = "path";
+  costCube2D.header.frame_id = "map";
   costCube2D.header.stamp = ros::Time::now();
   costCube2D.id = 0;
   costCube2D.action = 3;
@@ -36,7 +36,7 @@ void Visualize::clear() {
 //###################################################
 void Visualize::publishNode3DPose(Node3D& node) {
   geometry_msgs::PoseStamped pose;
-  pose.header.frame_id = "path";
+  pose.header.frame_id = "map";
   pose.header.stamp = ros::Time::now();
   pose.header.seq = 0;
   pose.pose.position.x = node.getX() * Constants::cellSize;
@@ -87,7 +87,7 @@ void Visualize::publishNode3DPoses(Node3D& node) {
 //###################################################
 void Visualize::publishNode2DPose(Node2D& node) {
   geometry_msgs::PoseStamped pose;
-  pose.header.frame_id = "path";
+  pose.header.frame_id = "map";
   pose.header.stamp = ros::Time::now();
   pose.header.seq = 0;
   pose.pose.position.x = (node.getX() + 0.5) * Constants::cellSize;
@@ -179,7 +179,7 @@ void Visualize::publishNode3DCosts(Node3D* nodes, int width, int height, int dep
       }
 
 
-      costCube.header.frame_id = "path";
+      costCube.header.frame_id = "map";
       costCube.header.stamp = ros::Time::now();
       costCube.id = i;
       costCube.type = visualization_msgs::Marker::CUBE;
@@ -261,7 +261,7 @@ void Visualize::publishNode2DCosts(Node2D* nodes, int width, int height) {
       }
 
 
-      costCube.header.frame_id = "path";
+      costCube.header.frame_id = "map";
       costCube.header.stamp = ros::Time::now();
       costCube.id = i;
       costCube.type = visualization_msgs::Marker::CUBE;

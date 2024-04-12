@@ -34,8 +34,8 @@ class Algorithm {
      \param goal the goal pose
      \param nodes3D the array of 3D nodes representing the configuration space C in R^3
      \param nodes2D the array of 2D nodes representing the configuration space C in R^2
-     \param width the width of the grid in number of cells
-     \param height the height of the grid in number of cells
+     \param width the width of the occ_grid_ in number of cells
+     \param height the height of the occ_grid_ in number of cells
      \param configurationSpace the lookup of configurations and their spatial occupancy enumeration
      \param dubinsLookup the lookup of analytical solutions (Dubin's paths)
      \param visualization the visualization object publishing the search to RViz

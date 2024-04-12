@@ -1,0 +1,7 @@
+<library path="lib/libhybrid_astar">
+  <class name="HybridAStar/Planner" type="HybridAStar::Planner" base_class_type="mbf_costmap_core::CostmapPlanner">
+    <description>
+      Hybrid A* Path Planner
+    </description>
+  </class>
+</library>

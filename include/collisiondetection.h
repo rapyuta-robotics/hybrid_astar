@@ -84,13 +84,13 @@ class CollisionDetection {
   bool configurationTest(float x, float y, float t) const;
 
   /*!
-     \brief updates the grid with the world map
+     \brief updates the occ_grid_ with the world map
   */
-  void updateGrid(nav_msgs::OccupancyGrid::Ptr map) {grid = map;}
+  void updateGrid(nav_msgs::OccupancyGrid* map) {grid = map;}
 
  private:
-  /// The occupancy grid
-  nav_msgs::OccupancyGrid::Ptr grid;
+  /// The occupancy occ_grid_
+  nav_msgs::OccupancyGrid* grid;
   /// The collision lookup table
   Constants::config collisionLookup[Constants::headings * Constants::positions];
 };

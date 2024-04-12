@@ -88,7 +88,7 @@ class Node2D {
   bool isOnGrid(const int width, const int height) const;
 
   // SUCCESSOR CREATION
-  /// Creates a successor on a eight-connected grid.
+  /// Creates a successor on a eight-connected occ_grid_.
   Node2D* createSuccessor(const int i);
 
   // CONSTANT VALUES

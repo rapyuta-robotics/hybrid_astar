@@ -63,13 +63,15 @@ void Path::updatePath(const std::vector<Node3D>& nodePath) {
 // ADD SEGMENT
 void Path::addSegment(const Node3D& node) {
   geometry_msgs::PoseStamped vertex;
+  vertex.header.frame_id = "map";
+  vertex.header.stamp = ros::Time(0);
   vertex.pose.position.x = node.getX() * Constants::cellSize;
   vertex.pose.position.y = node.getY() * Constants::cellSize;
   vertex.pose.position.z = 0;
   vertex.pose.orientation.x = 0;
   vertex.pose.orientation.y = 0;
   vertex.pose.orientation.z = 0;
-  vertex.pose.orientation.w = 0;
+  vertex.pose.orientation.w = 1;
   path.poses.push_back(vertex);
 }
 
@@ -83,7 +85,7 @@ void Path::addNode(const Node3D& node, int i) {
     pathNode.action = 3;
   }
 
-  pathNode.header.frame_id = "path";
+  pathNode.header.frame_id = "map";
   pathNode.header.stamp = ros::Time(0);
   pathNode.id = i;
   pathNode.type = visualization_msgs::Marker::SPHERE;
@@ -104,6 +106,7 @@ void Path::addNode(const Node3D& node, int i) {
 
   pathNode.pose.position.x = node.getX() * Constants::cellSize;
   pathNode.pose.position.y = node.getY() * Constants::cellSize;
+  pathNode.pose.orientation.w = 1;
   pathNodes.markers.push_back(pathNode);
 }
 
@@ -115,7 +118,7 @@ void Path::addVehicle(const Node3D& node, int i) {
     pathVehicle.action = 3;
   }
 
-  pathVehicle.header.frame_id = "path";
+  pathVehicle.header.frame_id = "map";
   pathVehicle.header.stamp = ros::Time(0);
   pathVehicle.id = i;
   pathVehicle.type = visualization_msgs::Marker::CUBE;

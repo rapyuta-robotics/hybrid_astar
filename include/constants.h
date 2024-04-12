@@ -10,8 +10,8 @@
 ////                                               INFO
 ////###################################################
 //    HEADING => 0 - 359 degrees, 0 being north pointing towards positive Y
-//    X-COORDINATE => designating the width of the grid
-//    Y-COORDINATE => designating the height of the grid
+//    X-COORDINATE => designating the width of the occ_grid_
+//    Y-COORDINATE => designating the height of the occ_grid_
 
 #include <cmath>
 
@@ -30,9 +30,9 @@ namespace Constants {
 // CONFIG FLAGS
 
 /// A flag for additional debugging output via `std::cout`
-static const bool coutDEBUG = false;
+static const bool coutDEBUG = true;
 /// A flag for the mode (true = manual; false = dynamic). Manual for static map or dynamic for dynamic map.
-static const bool manual = true;
+static const bool manual = false;
 /// A flag for the visualization of 3D nodes (true = on; false = off)
 static const bool visualization = false && manual;
 /// A flag for the visualization of 2D nodes (true = on; false = off)
@@ -73,8 +73,8 @@ static const float deltaHeadingDeg = 360 / (float)headings;
 static const float deltaHeadingRad = 2 * M_PI / (float)headings;
 /// [c*M_PI] --- The heading part of the goal condition
 static const float deltaHeadingNegRad = 2 * M_PI - deltaHeadingRad;
-/// [m] --- The cell size of the 2D grid of the world
-static const float cellSize = 1;
+/// [m] --- The cell size of the 2D occ_grid_ of the world
+static const float cellSize = 0.025;
 /*!
   \brief [m] --- The tie breaker breaks ties between nodes expanded in the same cell
 
@@ -93,9 +93,9 @@ static const float factor2D = sqrt(5) / sqrt(2) + 1;
 /// [#] --- A movement cost penalty for turning (choosing non straight motion primitives)
 static const float penaltyTurning = 1.05;
 /// [#] --- A movement cost penalty for reversing (choosing motion primitives > 2)
-static const float penaltyReversing = 2.0;
+static const float penaltyReversing = 1.0;
 /// [#] --- A movement cost penalty for change of direction (changing from primitives < 3 to primitives > 2)
-static const float penaltyCOD = 2.0;
+static const float penaltyCOD = 1.0;
 /// [m] --- The distance to the goal when the analytical solution (Dubin's shot) first triggers
 static const float dubinsShotDistance = 100;
 /// [m] --- The step size for the analytical solution (Dubin's shot) primarily relevant for collision checking

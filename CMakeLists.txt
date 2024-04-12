@@ -19,6 +19,16 @@ find_package(catkin REQUIRED COMPONENTS
     rospy
     std_msgs
     tf
+    costmap_2d
+    dynamic_reconfigure
+    geometry_msgs
+    mbf_costmap_core
+    mbf_msgs
+    nav_msgs
+    pluginlib
+    tf2_geometry_msgs
+    tf2_ros
+    visualization_msgs
     )
 
 set(SOURCES
@@ -54,7 +64,6 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/point.h #Boris Lau, Christoph Sprunk, Wolfram Burgard
 
     )
-add_library(HYAS ${SOURCES} ${HEADERS})
 
 ## Declare a catkin package
 catkin_package()
@@ -70,14 +79,18 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 include_directories(include ${OMPL_INCLUDE_DIRS})
 include_directories(include include)
 
+add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${OMPL_LIBRARIES})
+
 add_executable(tf_broadcaster src/tf_broadcaster.cpp)
 target_link_libraries(tf_broadcaster ${catkin_LIBRARIES})
 
-add_executable(hybrid_astar src/main.cpp ${HEADERS} ${SOURCES})
-target_link_libraries(hybrid_astar ${catkin_LIBRARIES})
-target_link_libraries(hybrid_astar ${OMPL_LIBRARIES})
+add_executable(${PROJECT_NAME}_node src/main.cpp ${HEADERS} ${SOURCES})
+target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}_node ${OMPL_LIBRARIES})
 
-install(TARGETS ${PROJECT_NAME} tf_broadcaster
+install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node tf_broadcaster
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

@@ -37,9 +37,9 @@ class Visualize {
     pubNodes2DCosts = n.advertise<visualization_msgs::MarkerArray>("/visualizeNodes2DCosts", 100);
 
     // CONFIGURE THE CONTAINER
-    poses3D.header.frame_id = "path";
-    poses3Dreverse.header.frame_id = "path";
-    poses2D.header.frame_id = "path";
+    poses3D.header.frame_id = "map";
+    poses3Dreverse.header.frame_id = "map";
+    poses2D.header.frame_id = "map";
   }
 
   // CLEAR VISUALIZATION
@@ -54,7 +54,7 @@ class Visualize {
   /// Publishes all expanded nodes to RViz
   void publishNode3DPoses(Node3D& node);
   // PUBLISH THE COST FOR A 3D NODE TO RViz
-  /// Publishes the minimum of the cost of all nodes in a 2D grid cell
+  /// Publishes the minimum of the cost of all nodes in a 2D occ_grid_ cell
   void publishNode3DCosts(Node3D* nodes, int width, int height, int depth);
 
   // PUBLISH A SINGEL/ARRAY 2D NODE TO RViz
@@ -63,7 +63,7 @@ class Visualize {
   /// Publishes all expanded nodes to RViz
   void publishNode2DPoses(Node2D& node);
   // PUBLISH THE COST FOR A 2D NODE TO RViz
-  /// Publishes the minimum of the cost of all nodes in a 2D grid cell
+  /// Publishes the minimum of the cost of all nodes in a 2D occ_grid_ cell
   void publishNode2DCosts(Node2D* nodes, int width, int height);
 
  private:

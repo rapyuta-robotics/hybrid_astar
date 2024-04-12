@@ -29,11 +29,11 @@ inline void dubinsLookup(float* lookup) {
   double start[3];
   double goal[] = {0, 0, 0};
 
-  // iterate over the X index of a grid cell
+  // iterate over the X index of a occ_grid_ cell
   for (int X = 0; X < width; ++X) {
     start[0] = X;
 
-    // iterate over the Y index of a grid cell
+    // iterate over the Y index of a occ_grid_ cell
     for (int Y = 0; Y < width; ++Y) {
       start[1] = Y;
 
@@ -104,7 +104,7 @@ inline void collisionLookup(Constants::config* lookup) {
 
   // ____________________________
   // VARIABLES FOR GRID TRAVERSAL
-  // vector for grid traversal
+  // vector for occ_grid_ traversal
   point t;
   point start;
   point end;
@@ -120,7 +120,7 @@ inline void collisionLookup(Constants::config* lookup) {
   // positive or negative step direction
   int stepX;
   int stepY;
-  // grid
+  // occ_grid_
   bool cSpace[size * size];
   bool inside = false;
   int hcross1 = 0;

@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<package>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="2">
   <name>hybrid_astar</name>
   <version>0.0.2</version>
   <description>The hybrid_astar package</description>
@@ -8,18 +9,21 @@
   <author email="kurzer@kth.se">Karl Kurzer</author>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>rospy</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_depend>visualization_msgs</build_depend>
-  <build_depend>tf</build_depend>
 
-  <run_depend>roscpp</run_depend>
-  <run_depend>rospy</run_depend>
-  <run_depend>std_msgs</run_depend>
-  <run_depend>visualization_msgs</run_depend>
-  <run_depend>tf</run_depend>
-  <run_depend>map_server</run_depend>
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>tf</depend>
+  <depend>costmap_2d</depend>
+  <depend>mbf_costmap_core</depend>
+  <depend>mbf_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>pluginlib</depend>
+
+  <exec_depend>map_server</exec_depend>
  
-  <export></export>
+  <export>
+    <mbf_costmap_core plugin="${prefix}/bgp_plugin.xml" />
+  </export>
 </package>

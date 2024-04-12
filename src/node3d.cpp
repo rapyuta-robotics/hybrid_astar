@@ -105,7 +105,7 @@ void Node3D::updateG() {
 ////###################################################
 ////                                         COST TO GO
 ////###################################################
-//void Node3D::updateH(const Node3D& goal, const nav_msgs::OccupancyGrid::ConstPtr& grid, Node2D* nodes2D, float* dubinsLookup, Visualize& visualization) {
+//void Node3D::updateH(const Node3D& goal, const nav_msgs::OccupancyGrid::ConstPtr& occ_grid_, Node2D* nodes2D, float* dubinsLookup, Visualize& visualization) {
 //  float dubinsCost = 0;
 //  float reedsSheppCost = 0;
 //  float twoDCost = 0;
@@ -185,20 +185,20 @@ void Node3D::updateG() {
 
 //  // if twoD heuristic is activated determine shortest path
 //  // unconstrained with obstacles
-//  if (Constants::twoD && !nodes2D[(int)y * grid->info.width + (int)x].isDiscovered()) {
+//  if (Constants::twoD && !nodes2D[(int)y * occ_grid_->info.width + (int)x].isDiscovered()) {
 //    // create a 2d start node
 //    Node2D start2d(x, y, 0, 0, nullptr);
 //    // create a 2d goal node
 //    Node2D goal2d(goal.x, goal.y, 0, 0, nullptr);
 //    // run 2d astar and return the cost of the cheapest path for that node
-//    nodes2D[(int)y * grid->info.width + (int)x].setG(Algorithm::aStar(goal2d, start2d, grid, nodes2D, visualization));
+//    nodes2D[(int)y * occ_grid_->info.width + (int)x].setG(Algorithm::aStar(goal2d, start2d, occ_grid_, nodes2D, visualization));
 //  }
 
 //  if (Constants::twoD) {
 //    // offset for same node in cell
 //    twoDoffset = sqrt(((x - (long)x) - (goal.x - (long)goal.x)) * ((x - (long)x) - (goal.x - (long)goal.x)) +
 //                      ((y - (long)y) - (goal.y - (long)goal.y)) * ((y - (long)y) - (goal.y - (long)goal.y)));
-//    twoDCost = nodes2D[(int)y * grid->info.width + (int)x].getG() - twoDoffset;
+//    twoDCost = nodes2D[(int)y * occ_grid_->info.width + (int)x].getG() - twoDoffset;
 
 //  }
 
@@ -209,7 +209,7 @@ void Node3D::updateG() {
 ////###################################################
 ////                                 COLLISION CHECKING
 ////###################################################
-//bool Node3D::isTraversable(const nav_msgs::OccupancyGrid::ConstPtr& grid, Constants::config* collisionLookup) const {
+//bool Node3D::isTraversable(const nav_msgs::OccupancyGrid::ConstPtr& occ_grid_, Constants::config* collisionLookup) const {
 //  int X = (int)x;
 //  int Y = (int)y;
 //  int iX = (int)((x - (long)x) * Constants::positionResolution);
@@ -225,9 +225,9 @@ void Node3D::updateG() {
 //    cX = (X + collisionLookup[idx].pos[i].x);
 //    cY = (Y + collisionLookup[idx].pos[i].y);
 
-//    // make sure the configuration coordinates are actually on the grid
-//    if (cX >= 0 && (unsigned int)cX < grid->info.width && cY >= 0 && (unsigned int)cY < grid->info.height) {
-//      if (grid->data[cY * grid->info.width + cX]) {
+//    // make sure the configuration coordinates are actually on the occ_grid_
+//    if (cX >= 0 && (unsigned int)cX < occ_grid_->info.width && cY >= 0 && (unsigned int)cY < occ_grid_->info.height) {
+//      if (occ_grid_->data[cY * occ_grid_->info.width + cX]) {
 //        return false;
 //      }
 //    }
@@ -240,7 +240,7 @@ void Node3D::updateG() {
 ////###################################################
 ////                                        DUBINS SHOT
 ////###################################################
-//Node3D* Node3D::dubinsShot(const Node3D& goal, const nav_msgs::OccupancyGrid::ConstPtr& grid, Constants::config* collisionLookup) const {
+//Node3D* Node3D::dubinsShot(const Node3D& goal, const nav_msgs::OccupancyGrid::ConstPtr& occ_grid_, Constants::config* collisionLookup) const {
 //  // start
 //  double q0[] = { x, y, t };
 //  // goal
@@ -264,7 +264,7 @@ void Node3D::updateG() {
 //    dubinsNodes[i].setT(helper::normalizeHeadingRad(q[2]));
 
 //    // collision check
-//    if (dubinsNodes[i].isTraversable(grid, collisionLookup)) {
+//    if (dubinsNodes[i].isTraversable(occ_grid_, collisionLookup)) {
 
 //      // set the predecessor to the previous step
 //      if (i > 0) {

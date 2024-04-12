@@ -57,15 +57,15 @@ void Smoother::smoothPath(DynamicVoronoi& voronoi) {
       //todo not implemented yet
       // voronoiTerm(); 
 
-      // ensure that it is on the grid
+      // ensure that it is on the occ_grid_
       correction = correction - smoothnessTerm(xim2, xim1, xi, xip1, xip2);
       if (!isOnGrid(xi + correction)) { continue; }
 
-      // ensure that it is on the grid
+      // ensure that it is on the occ_grid_
       correction = correction - curvatureTerm(xim2, xim1, xi, xip1, xip2);
       if (!isOnGrid(xi + correction)) { continue; }
 
-      // ensure that it is on the grid
+      // ensure that it is on the occ_grid_
 
       xi = xi + alpha * correction/totalWeight;
       newPath[i].setX(xi.getX());

@@ -65,7 +65,7 @@ class Node3D {
   void setG(const float& g) { this->g = g; }
   /// set the cost-to-come (heuristic value)
   void setH(const float& h) { this->h = h; }
-  /// set and get the index of the node in the 3D grid
+  /// set and get the index of the node in the 3D occ_grid_
   int setIdx(int width, int height) { this->idx = (int)(t / Constants::deltaHeadingRad) * width * height + (int)(y) * width + (int)(x); return idx;}
   /// open the node
   void open() { o = true; c = false;}
